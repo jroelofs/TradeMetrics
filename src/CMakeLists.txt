@@ -1,5 +1,5 @@
 set(sources
   MetricsEngine.cpp
-  Parser.cpp)
+  CSVParser.cpp)
 
 add_library(trademetrics ${sources})

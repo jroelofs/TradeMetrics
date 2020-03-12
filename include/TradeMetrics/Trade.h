@@ -8,8 +8,8 @@ namespace TradeMetrics {
 struct Trade {
   int64_t TimeStamp;
   char Symbol[4];
-  int32_t Quantity;
-  int32_t Price;
+  int64_t Quantity;
+  int64_t Price;
 };
 
 } // namespace TradeMetrics

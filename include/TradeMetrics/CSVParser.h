@@ -11,9 +11,8 @@ class CSVParser : public TradeFeed {
 public:
   CSVParser(std::istream &IS) : IS(IS) {}
 
-  bool empty() const override { return true; }
-
-  Trade next() override { return Trade(); }
+  bool empty() const override;
+  Trade next() override;
 
 private:
   std::istream &IS;
