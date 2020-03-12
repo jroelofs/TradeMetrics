@@ -23,6 +23,7 @@ add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
                  EXCLUDE_FROM_ALL)
 
 set(sources
+  UnitMetrics.cpp
   UnitMetricsEngine.cpp
   UnitParser.cpp)
 
