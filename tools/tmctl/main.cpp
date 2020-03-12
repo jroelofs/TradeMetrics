@@ -1,5 +1,6 @@
 #include "TradeMetrics/CSVParser.h"
 #include "TradeMetrics/MetricsEngine.h"
+#include "TradeMetrics/Metrics.h"
 
 #include <fstream>
 #include <iostream>
@@ -15,6 +16,36 @@ static void usage() {
   exit(-1);
 }
 
+static void go(std::istream &IS, std::ostream &OS) {
+  CSVParser P(std::cin);
+  MetricsEngine ME(P);
+
+  AllSymbolsMetric ASM;
+  ME.enroll(&ASM);
+
+  MaxGapMetric MGM;
+  ME.enroll(&MGM);
+
+  TotalVolumeMetric TVM;
+  ME.enroll(&TVM);
+
+  MaxPriceMetric MPM;
+  ME.enroll(&MPM);
+
+  WeightedAveragePriceMetric WAPM;
+  ME.enroll(&WAPM);
+
+  ME.run();
+
+  for (const auto &Symbol : ASM.Symbols) {
+    OS << Symbol << ','
+       << MGM.maxGap(Symbol) << ','
+       << TVM.volume(Symbol) << ','
+       << MPM.maxPrice(Symbol) << ','
+       << WAPM.avgPrice(Symbol) << '\n';
+  }
+}
+
 int main(int argc, char **argv) {
   if (argc != 2 || std::string("-h") == argv[1] ||
       std::string("--help") == argv[1]) {
@@ -24,10 +55,7 @@ int main(int argc, char **argv) {
 
   // Input via pipe.
   if (std::string("-") == argv[1]) {
-    CSVParser P(std::cin);
-    MetricsEngine ME(P);
-    ME.run();
-    ME.reportCSV(std::cout);
+    go(std::cin, std::cout);
     return 0;
   }
 
@@ -38,9 +66,6 @@ int main(int argc, char **argv) {
     return -1;
   }
 
-  CSVParser P(InFile);
-  MetricsEngine ME(P);
-  ME.run();
-  ME.reportCSV(std::cout);
+  go(InFile, std::cout);
   return 0;
 }

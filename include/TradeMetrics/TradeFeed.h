@@ -6,6 +6,7 @@
 namespace TradeMetrics {
 
 class TradeFeed {
+public:
   virtual bool empty() const = 0;
   virtual Trade next() = 0;
 };

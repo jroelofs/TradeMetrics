@@ -1,11 +1,17 @@
 #ifndef TRADEMETRICS_METRICSENGINE_H
 #define TRADEMETRICS_METRICSENGINE_H
 
+#include "TradeMetrics/Trade.h"
+
+#include <memory>
 #include <ostream>
+#include <vector>
+
+namespace TradeMetrics {
 
 class TradeFeed;
 
-namespace TradeMetrics {
+class Metric;
 
 class MetricsEngine {
 public:
@@ -13,9 +19,10 @@ public:
 
   void run();
 
-  void reportCSV(std::ostream &OS) const;
+  void enroll(Metric *M);
 
 private:
+  std::vector<Metric*> Metrics;
   TradeFeed &TF;
 };
 
