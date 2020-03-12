@@ -3,6 +3,7 @@
 using namespace TradeMetrics;
 
 bool CSVParser::empty() const {
+  IS.peek();
   return IS.eof();
 }
 
@@ -15,7 +16,6 @@ static void malformedInput() {
 }
 
 Trade CSVParser::next() {
-  assert(!IS.eof());
   Trade T;
   std::string Data;
 

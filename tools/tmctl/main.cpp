@@ -17,7 +17,7 @@ static void usage() {
 }
 
 static void go(std::istream &IS, std::ostream &OS) {
-  CSVParser P(std::cin);
+  CSVParser P(IS);
   MetricsEngine ME(P);
 
   AllSymbolsMetric ASM;
@@ -41,8 +41,8 @@ static void go(std::istream &IS, std::ostream &OS) {
     OS << Symbol << ','
        << MGM.maxGap(Symbol) << ','
        << TVM.volume(Symbol) << ','
-       << MPM.maxPrice(Symbol) << ','
-       << WAPM.avgPrice(Symbol) << '\n';
+       << WAPM.avgPrice(Symbol) << ','
+       << MPM.maxPrice(Symbol) << '\n';
   }
 }
 
@@ -65,7 +65,6 @@ int main(int argc, char **argv) {
     std::cerr << "Could not open file";
     return -1;
   }
-
   go(InFile, std::cout);
   return 0;
 }

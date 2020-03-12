@@ -15,7 +15,7 @@ ninja
 ### Run
 
 ```sh
-$ tmctl input.csv > output.csv
+$ cat input.csv | tmctl - > output.csv
 ```
 
 ### Test
