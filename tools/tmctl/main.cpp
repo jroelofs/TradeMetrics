@@ -37,12 +37,15 @@ static void go(std::istream &IS, std::ostream &OS) {
 
   ME.run();
 
-  for (const auto &Symbol : ASM.Symbols) {
-    OS << Symbol << ','
-       << MGM.maxGap(Symbol) << ','
-       << TVM.volume(Symbol) << ','
-       << WAPM.avgPrice(Symbol) << ','
-       << MPM.maxPrice(Symbol) << '\n';
+  for (size_t I = 0, E = ASM.Symbols.size(); I != E; ++I) {
+    if (ASM.Symbols[I]) {
+      SymbolName Symbol(I);
+      OS << Symbol << ','
+         << MGM.maxGap(Symbol) << ','
+         << TVM.volume(Symbol) << ','
+         << WAPM.avgPrice(Symbol) << ','
+         << MPM.maxPrice(Symbol) << '\n';
+    }
   }
 }
 

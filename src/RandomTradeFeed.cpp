@@ -55,7 +55,7 @@ public:
       : NumTrades(NumTrades), TradesPublished(0), Time(0), G(Seed),
         Symbols(MakeSymbols(SymbolCount)) {}
 
-  bool empty() const override { return NumTrades == TradesPublished; }
+  bool empty() const override { return NumTrades == -1 ? false : NumTrades == TradesPublished; }
 
   Trade next() override {
     Trade T;
