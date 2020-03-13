@@ -4,7 +4,7 @@
 
 #include <array>
 
-using namespace TradeMetrics;
+using namespace TM;
 
 TEST(Metrics, AllSymbolsMetric) {
   AllSymbolsMetric ASM;

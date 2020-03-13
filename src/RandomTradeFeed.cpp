@@ -5,7 +5,7 @@
 #include <random>
 #include <vector>
 
-using namespace TradeMetrics;
+using namespace TM;
 
 static constexpr int Seed = 42;
 
@@ -80,7 +80,7 @@ private:
 
 } // anonymous namespace
 
-std::unique_ptr<TradeFeed> TradeMetrics::CreateRandomTradeFeed(int64_t NumTrades,
-                                                               int SymbolCount) {
+std::unique_ptr<TradeFeed> TM::CreateRandomTradeFeed(int64_t NumTrades,
+                                                     int SymbolCount) {
   return std::make_unique<TradeGen>(NumTrades, SymbolCount);
 }

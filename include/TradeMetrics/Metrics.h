@@ -6,7 +6,7 @@
 #include <set>
 #include <unordered_map>
 
-namespace TradeMetrics {
+namespace TM {
 
 struct Metric {
   virtual void publish(Trade T) = 0;
@@ -88,6 +88,6 @@ struct WeightedAveragePriceMetric : public Metric {
   std::unordered_map<SymbolName, Info> Sum;
 };
 
-} // namespace TradeMetrics
+} // namespace TM
 
 #endif

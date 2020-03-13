@@ -4,7 +4,7 @@
 
 #include <benchmark/benchmark.h>
 
-using namespace TradeMetrics;
+using namespace TM;
 
 static void BM_AllMetrics(benchmark::State &State) {
   for (auto _ : State) {

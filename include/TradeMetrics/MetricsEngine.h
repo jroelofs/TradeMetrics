@@ -7,7 +7,7 @@
 #include <ostream>
 #include <vector>
 
-namespace TradeMetrics {
+namespace TM {
 
 class TradeFeed;
 
@@ -26,6 +26,6 @@ private:
   TradeFeed &TF;
 };
 
-} // namespace TradeMetrics
+} // namespace TM
 
 #endif

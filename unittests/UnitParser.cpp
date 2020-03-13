@@ -3,7 +3,7 @@
 
 #include "gtest/gtest.h"
 
-using namespace TradeMetrics;
+using namespace TM;
 
 TEST(Parsing, OneLine) {
   // 10 shares of aaa stock at a price of 12

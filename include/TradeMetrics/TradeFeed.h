@@ -5,7 +5,7 @@
 
 #include <memory>
 
-namespace TradeMetrics {
+namespace TM {
 
 class TradeFeed {
 public:
@@ -19,6 +19,6 @@ static constexpr int ALen = sizeof(Alphabet) - 1;
 
 std::unique_ptr<TradeFeed> CreateRandomTradeFeed(int64_t NumTrades, int NumSymbols);
 
-} // namespace TradeMetrics
+} // namespace TM
 
 #endif

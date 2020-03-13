@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-using namespace TradeMetrics;
+using namespace TM;
 
 static void usage() {
   std::cerr << "usage:\n"

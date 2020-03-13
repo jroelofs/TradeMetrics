@@ -6,7 +6,7 @@
 
 #include <ostream>
 
-using namespace TradeMetrics;
+using namespace TM;
 
 void MetricsEngine::run() {
   while (!TF.empty()) {

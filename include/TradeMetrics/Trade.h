@@ -4,7 +4,7 @@
 #include <ostream>
 #include <cinttypes>
 
-namespace TradeMetrics {
+namespace TM {
 
 struct SymbolName {
   SymbolName() : Val(0) {}
@@ -46,11 +46,11 @@ inline std::ostream &operator<<(std::ostream &OS, Trade T) {
   return OS << T.TimeStamp << ',' << T.Symbol << ',' << T.Quantity << ',' << T.Price;
 }
 
-} // namespace TradeMetrics
+} // namespace TM
 
 namespace std {
-  template <> struct hash<TradeMetrics::SymbolName> {
-    size_t operator()(TradeMetrics::SymbolName S) const {
+  template <> struct hash<TM::SymbolName> {
+    size_t operator()(TM::SymbolName S) const {
       return hash<int32_t>()(S.Val);
     }
   };

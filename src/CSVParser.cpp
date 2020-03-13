@@ -1,6 +1,6 @@
 #include "TradeMetrics/CSVParser.h"
 
-using namespace TradeMetrics;
+using namespace TM;
 
 bool CSVParser::empty() const {
   IS.peek();

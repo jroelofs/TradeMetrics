@@ -4,7 +4,7 @@
 
 #include "gtest/gtest.h"
 
-using namespace TradeMetrics;
+using namespace TM;
 
 TEST(MetricsEngine, Sample) {
   // clang-format off
