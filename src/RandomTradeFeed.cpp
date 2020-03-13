@@ -62,10 +62,7 @@ public:
     Trade T;
 
     T.TimeStamp = Time += RandomVal<int64_t>(1, 100, G);
-
-    std::string Symbol = *RandomElt(begin(Symbols), end(Symbols), G);
-    strlcpy(T.Symbol, Symbol.c_str(), sizeof(T.Symbol));
-
+    T.Symbol = *RandomElt(begin(Symbols), end(Symbols), G);
     T.Quantity = RandomVal<int64_t>(1, 100000, G);
     T.Price = RandomVal<int64_t>(1, 100000, G);
 

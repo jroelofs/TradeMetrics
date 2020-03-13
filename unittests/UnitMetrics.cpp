@@ -13,7 +13,7 @@ TEST(Metrics, AllSymbolsMetric) {
   ASM.publish({1, "aaa", 1, 1});
   ASM.publish({2, "aab", 2, 2});
 
-  std::array<std::string, 3> Expected{"aaa", "aab", "aac"};
+  std::array<SymbolName, 3> Expected{"aaa", "aab", "aac"};
   EXPECT_TRUE(std::equal(begin(Expected), end(Expected), begin(ASM.Symbols)));
 }
 
