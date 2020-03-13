@@ -1,7 +1,6 @@
-#include "TradeMetrics/TradeGen.h"
+#include "TradeMetrics/TradeFeed.h"
 
 #include <iostream>
-#include <memory>
 
 using namespace TradeMetrics;
 
@@ -26,7 +25,7 @@ int main(int argc, char **argv) {
     return -1;
   }
 
-  std::unique_ptr<TradeFeed> TG = MakeTradeGen(NumTrades, SymbolCount);
+  std::unique_ptr<TradeFeed> TG = CreateRandomTradeFeed(NumTrades, SymbolCount);
 
   while (!TG->empty()) {
     std::cout << TG->next() << '\n';

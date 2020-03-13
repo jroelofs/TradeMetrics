@@ -1,6 +1,6 @@
 set(sources
   CSVParser.cpp
   MetricsEngine.cpp
-  TradeGen.cpp)
+  RandomTradeFeed.cpp)
 
 add_library(trademetrics ${sources})

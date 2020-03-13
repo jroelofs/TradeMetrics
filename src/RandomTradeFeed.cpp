@@ -1,4 +1,4 @@
-#include "TradeMetrics/TradeGen.h"
+#include "TradeMetrics/TradeFeed.h"
 
 #include <algorithm>
 #include <iostream>
@@ -83,7 +83,7 @@ private:
 
 } // anonymous namespace
 
-std::unique_ptr<TradeFeed> TradeMetrics::MakeTradeGen(int64_t NumTrades,
-                                                      int SymbolCount) {
+std::unique_ptr<TradeFeed> TradeMetrics::CreateRandomTradeFeed(int64_t NumTrades,
+                                                               int SymbolCount) {
   return std::make_unique<TradeGen>(NumTrades, SymbolCount);
 }
