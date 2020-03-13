@@ -6,11 +6,11 @@
 
 using namespace TradeMetrics;
 
-static void BM_MetricsEngine(benchmark::State &State) {
+static void BM_AllMetrics(benchmark::State &State) {
   for (auto _ : State) {
     State.PauseTiming();
 
-    std::unique_ptr<TradeFeed> RTF = CreateRandomTradeFeed(State.iterations(), 10);
+    std::unique_ptr<TradeFeed> RTF = CreateRandomTradeFeed(State.iterations(), State.range(0));
 
     MetricsEngine ME(*RTF);
 
@@ -34,6 +34,28 @@ static void BM_MetricsEngine(benchmark::State &State) {
     ME.run();
   }
 }
-BENCHMARK(BM_MetricsEngine);
+BENCHMARK(BM_AllMetrics)->Range(8, 8<<10);
+
+template<typename Metric>
+static void BM_SingleMetric(benchmark::State &State) {
+  for (auto _ : State) {
+    State.PauseTiming();
+
+    std::unique_ptr<TradeFeed> RTF = CreateRandomTradeFeed(State.iterations(), State.range(0));
+
+    Metric M;
+
+    State.ResumeTiming();
+
+    while (!RTF->empty()) {
+      M.publish(RTF->next());
+    }
+  }
+}
+BENCHMARK_TEMPLATE(BM_SingleMetric, AllSymbolsMetric)->Range(4, 8<<10);
+BENCHMARK_TEMPLATE(BM_SingleMetric, MaxGapMetric)->Range(4, 8<<10);
+BENCHMARK_TEMPLATE(BM_SingleMetric, TotalVolumeMetric)->Range(4, 8<<10);
+BENCHMARK_TEMPLATE(BM_SingleMetric, MaxPriceMetric)->Range(4, 8<<10);
+BENCHMARK_TEMPLATE(BM_SingleMetric, WeightedAveragePriceMetric)->Range(4, 8<<10);
 
 BENCHMARK_MAIN();
