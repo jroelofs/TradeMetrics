@@ -25,7 +25,8 @@ add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
 set(sources
   UnitMetrics.cpp
   UnitMetricsEngine.cpp
-  UnitParser.cpp)
+  UnitParser.cpp
+  UnitTrade.cpp)
 
 add_executable(unittests ${sources})
 

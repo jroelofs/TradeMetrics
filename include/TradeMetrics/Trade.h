@@ -10,21 +10,20 @@ struct SymbolName {
   SymbolName() : Val(0) {}
   SymbolName(int32_t Val) : Val(Val) {}
   SymbolName(const std::string &S) {
-    Val = S[0] | (S[1] << 8) | (S[2] << 16);
+    Val = (S[0] - 'a') + (S[1] - 'a') * 26 + (S[2] - 'a') * 26 * 26;
   }
   SymbolName(const char (&S)[4]) {
-    Val = S[0] | (S[1] << 8) | (S[2] << 16);
+    Val = (S[0] - 'a') + (S[1] - 'a') * 26 + (S[2] - 'a') * 26 * 26;
   }
 
   bool operator==(SymbolName RHS) const { return Val == RHS.Val; }
   bool operator==(int32_t RHS) const { return Val == RHS; }
   operator int32_t() const { return Val; }
   operator std::string() const {
-    return {
-      char(Val & 0xff),
-      char((Val >> 8) & 0xff),
-      char((Val >> 16) & 0xff)
-    };
+    int Lo = Val % 26;
+    int Mid = ((Val - Lo) / 26) % 26;
+    int Hi = (Val - Mid * 26 - Lo) / 26 / 26;
+    return { char(Lo + 'a'), char(Mid + 'a'), char(Hi + 'a') };
   }
 
   int32_t Val;
