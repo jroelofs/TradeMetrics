@@ -9,10 +9,10 @@ using namespace TM;
 
 static constexpr int Seed = 42;
 
-static std::vector<std::string> MakeSymbols(int Count) {
-  std::vector<std::string> Symbols(Count);
+static std::vector<SymbolName> MakeSymbols(int Count) {
+  std::vector<SymbolName> Symbols(Count);
   int I = 0;
-  std::generate_n(begin(Symbols), Count, [&I]() -> std::string {
+  std::generate_n(begin(Symbols), Count, [&I]() -> SymbolName {
     // First break up I into the base of ALen, which "counts" through each of
     // the letters in Alphabet.
     int Lo = I % ALen;
@@ -29,9 +29,8 @@ static std::vector<std::string> MakeSymbols(int Count) {
     Mid = (Mid + Lo) % ALen;
     Hi = (Hi + Lo) % ALen;
 
-    char Sym[4] = {Alphabet[Lo], Alphabet[Mid], Alphabet[Hi], '\0'};
     I++;
-    return Sym;
+    return (char[4]){Alphabet[Lo], Alphabet[Mid], Alphabet[Hi], 0};
   });
   return Symbols;
 }
@@ -75,7 +74,7 @@ private:
   int64_t TradesPublished;
   int64_t Time;
   std::mt19937 G;
-  std::vector<std::string> Symbols;
+  std::vector<SymbolName> Symbols;
 };
 
 } // anonymous namespace

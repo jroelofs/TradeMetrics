@@ -23,8 +23,7 @@ struct SymbolName {
     return {
       char(Val & 0xff),
       char((Val >> 8) & 0xff),
-      char((Val >> 16) & 0xff),
-      0
+      char((Val >> 16) & 0xff)
     };
   }
 
