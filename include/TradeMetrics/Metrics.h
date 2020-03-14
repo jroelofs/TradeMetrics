@@ -10,6 +10,7 @@ namespace TM {
 
 struct Metric {
   virtual void publish(Trade T) = 0;
+  virtual ~Metric() {}
 };
 
 struct AllSymbolsMetric : public Metric {
