@@ -2,21 +2,29 @@
 #define TRADEMETRICS_METRICS_H
 
 #include "TradeMetrics/MetricsEngine.h"
+#include "TradeMetrics/Trade.h"
 
 #include <set>
 #include <unordered_map>
+#include <ostream>
+#include <vector>
 
 namespace TM {
 
 struct Metric {
   virtual void publish(Trade T) = 0;
   virtual ~Metric() {}
+  virtual void print(std::ostream &OS, SymbolName S) const = 0;
 };
 
 struct AllSymbolsMetric : public Metric {
   AllSymbolsMetric() : Symbols(26*26*26, false) {}
   void publish(Trade T) override {
     Symbols[T.Symbol] = true;
+  }
+  void print(std::ostream &OS, SymbolName S) const override {
+    if (Symbols[S])
+      OS << S;
   }
   std::vector<bool> Symbols;
 };
@@ -41,6 +49,9 @@ struct MaxGapMetric : public Metric {
   int64_t maxGap(SymbolName S) const {
     return Gaps[S].MaxGap;
   }
+  void print(std::ostream &OS, SymbolName S) const override {
+    OS << maxGap(S);
+  }
   std::vector<Info> Gaps;
 };
 
@@ -52,6 +63,9 @@ struct TotalVolumeMetric : public Metric {
   int64_t volume(SymbolName S) const {
     return Volume[S];
   }
+  void print(std::ostream &OS, SymbolName S) const override {
+    OS << volume(S);
+  }
   std::vector<int64_t> Volume;
 };
 
@@ -62,6 +76,9 @@ struct MaxPriceMetric : public Metric {
   }
   int64_t maxPrice(SymbolName S) const {
     return MaxPrice[S];
+  }
+  void print(std::ostream &OS, SymbolName S) const override {
+    OS << maxPrice(S);
   }
   std::vector<int64_t> MaxPrice;
 };
@@ -78,6 +95,9 @@ struct WeightedAveragePriceMetric : public Metric {
   }
   int64_t avgPrice(SymbolName S) const {
     return Sum[S].Volume / Sum[S].Quantity;
+  }
+  void print(std::ostream &OS, SymbolName S) const override {
+    OS << avgPrice(S);
   }
   std::vector<Info> Sum;
 };

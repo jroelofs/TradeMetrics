@@ -20,9 +20,6 @@ static void go(std::istream &IS, std::ostream &OS) {
   CSVParser P(IS);
   MetricsEngine ME(P);
 
-  AllSymbolsMetric ASM;
-  ME.enroll(&ASM);
-
   MaxGapMetric MGM;
   ME.enroll(&MGM);
 
@@ -37,16 +34,7 @@ static void go(std::istream &IS, std::ostream &OS) {
 
   ME.run();
 
-  for (size_t I = 0, E = ASM.Symbols.size(); I != E; ++I) {
-    if (ASM.Symbols[I]) {
-      SymbolName Symbol(I);
-      OS << Symbol << ','
-         << MGM.maxGap(Symbol) << ','
-         << TVM.volume(Symbol) << ','
-         << WAPM.avgPrice(Symbol) << ','
-         << MPM.maxPrice(Symbol) << '\n';
-    }
-  }
+  ME.report(OS);
 }
 
 int main(int argc, char **argv) {
