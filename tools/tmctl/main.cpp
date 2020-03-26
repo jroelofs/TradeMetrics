@@ -7,7 +7,7 @@
 #include <sstream>
 #include <string>
 
-using namespace TradeMetrics;
+using namespace TM;
 
 static void usage() {
   std::cerr << "usage:\n"
@@ -19,9 +19,6 @@ static void usage() {
 static void go(std::istream &IS, std::ostream &OS) {
   CSVParser P(IS);
   MetricsEngine ME(P);
-
-  AllSymbolsMetric ASM;
-  ME.enroll(&ASM);
 
   MaxGapMetric MGM;
   ME.enroll(&MGM);
@@ -37,13 +34,7 @@ static void go(std::istream &IS, std::ostream &OS) {
 
   ME.run();
 
-  for (const auto &Symbol : ASM.Symbols) {
-    OS << Symbol << ','
-       << MGM.maxGap(Symbol) << ','
-       << TVM.volume(Symbol) << ','
-       << WAPM.avgPrice(Symbol) << ','
-       << MPM.maxPrice(Symbol) << '\n';
-  }
+  ME.report(OS);
 }
 
 int main(int argc, char **argv) {

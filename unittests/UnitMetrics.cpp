@@ -4,7 +4,7 @@
 
 #include <array>
 
-using namespace TradeMetrics;
+using namespace TM;
 
 TEST(Metrics, AllSymbolsMetric) {
   AllSymbolsMetric ASM;
@@ -13,8 +13,10 @@ TEST(Metrics, AllSymbolsMetric) {
   ASM.publish({1, "aaa", 1, 1});
   ASM.publish({2, "aab", 2, 2});
 
-  std::array<std::string, 3> Expected{"aaa", "aab", "aac"};
-  EXPECT_TRUE(std::equal(begin(Expected), end(Expected), begin(ASM.Symbols)));
+  EXPECT_TRUE(ASM.Symbols[SymbolName("aaa")]);
+  EXPECT_TRUE(ASM.Symbols[SymbolName("aab")]);
+  EXPECT_TRUE(ASM.Symbols[SymbolName("aac")]);
+  EXPECT_FALSE(ASM.Symbols[SymbolName("zzz")]);
 }
 
 TEST(Metrics, MaxTimeGap) {

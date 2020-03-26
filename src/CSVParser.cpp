@@ -1,6 +1,6 @@
 #include "TradeMetrics/CSVParser.h"
 
-using namespace TradeMetrics;
+using namespace TM;
 
 bool CSVParser::empty() const {
   IS.peek();
@@ -24,7 +24,7 @@ Trade CSVParser::next() {
 
   if (!std::getline(IS, Data, ',')) { malformedInput(); }
   if (Data.size() > 3) { malformedInput(); }
-  strlcpy(T.Symbol, Data.c_str(), sizeof(T.Symbol));
+  T.Symbol = Data;
 
   if (!std::getline(IS, Data, ',')) { malformedInput(); }
   T.Quantity = std::stoll(Data);

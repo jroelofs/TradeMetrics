@@ -5,7 +5,7 @@
 
 #include <istream>
 
-namespace TradeMetrics {
+namespace TM {
 
 class CSVParser : public TradeFeed {
 public:
@@ -18,6 +18,6 @@ private:
   std::istream &IS;
 };
 
-} // namespace TradeMetrics
+} // namespace TM
 
 #endif

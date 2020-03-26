@@ -14,8 +14,14 @@ ninja
 
 ### Run
 
+Fixed input:
 ```sh
 $ cat input.csv | tmctl - > output.csv
+```
+
+Randomly generated trades (stress test / benchmarking):
+```sh
+$ tradegen 500000 10 | tmctl -
 ```
 
 ### Test
